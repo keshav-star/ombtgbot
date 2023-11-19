@@ -1,0 +1,20 @@
+{
+  "name": "ombtgbot",
+  "version": "1.0.0",
+  "description": "omb bot for telegram",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "biography"
+  ],
+  "author": "keshav",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mongoose": "^8.0.1",
+    "node-cron": "^3.0.3",
+    "node-telegram-bot-api": "^0.64.0"
+  }
+}
