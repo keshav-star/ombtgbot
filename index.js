@@ -1,7 +1,11 @@
 const TelegramBot = require('node-telegram-bot-api');
 const ombjson = require('./omb.json')
 const cron = require('node-cron');
-
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+app.use(express.static('static'))
+app.use(express.json());
 require("dotenv").config();
 
 const token = process.env.TOKEN;
@@ -56,6 +60,14 @@ ${formatKeyValuePairs(jsonObject.events)}
     arrayNumber = arrayNumber + 1;
     if (arrayNumber > ombjson.length) arrayNumber = 1;
 }
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
 
 sendDailyMessage()
 
