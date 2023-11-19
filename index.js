@@ -35,6 +35,7 @@ function sendDailyMessage() {
     try {
         const jsonObject = ombjson[arrayNumber];
         const imageUrl = jsonObject.imageurl;
+        console.log(imageUrl)
         const message = `
             🌟 *Name*: ${jsonObject.name}
 
@@ -54,8 +55,10 @@ ${formatKeyValuePairs(jsonObject.events)}
         console.log(error)
     }
     arrayNumber = arrayNumber + 1;
-    if (arrayNumber > ombjson.length()) arrayNumber = 1;
+    if (arrayNumber > ombjson.length) arrayNumber = 1;
 }
+
+sendDailyMessage()
 
 cron.schedule('* */6 * * *', () => {
     sendDailyMessage();
