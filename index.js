@@ -17,7 +17,7 @@ const formatKeyValuePairs = (obj) => {
         .join('\n\n');
 };
 
-const linkUrl = 'https://google.com';
+const linkUrl = 'https://omb.netlify.app';
 const buttonText = 'Read More';
 
 const keyboard = {
@@ -45,19 +45,21 @@ function sendDailyMessage() {
 ${formatKeyValuePairs(jsonObject.events)} 
 
 `;
-bot.sendPhoto(chatId, imageUrl, {
-    caption: message,
-    parse_mode: 'Markdown',
-    reply_markup: JSON.stringify(keyboard),
-    });
+        bot.sendPhoto(chatId, imageUrl, {
+            caption: message,
+            parse_mode: 'Markdown',
+            reply_markup: JSON.stringify(keyboard),
+        });
     } catch (error) {
         console.log(error)
     }
     arrayNumber = arrayNumber + 1;
+    if (arrayNumber > ombjson.length()) arrayNumber = 1;
 }
 
-// cron.schedule('*/5 * * * *', () => {
-//     sendDailyMessage();
-// });
+cron.schedule('* */6 * * *', () => {
+    sendDailyMessage();
+});
+
 // Set up a schedule to send the message daily
-setInterval(sendDailyMessage, 5 * 1000); // 24 hours
+// setInterval(sendDailyMessage, 5 * 1000); // 24 hours
