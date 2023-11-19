@@ -34,8 +34,7 @@ function sendDailyMessage() {
 
     try {
         const jsonObject = ombjson[arrayNumber];
-        const imageUrl = jsonObject.imageurl;
-        console.log(imageUrl)
+        const imageUrl = jsonObject?.imageurl;
         const message = `
             🌟 *Name*: ${jsonObject.name}
 
