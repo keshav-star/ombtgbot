@@ -4,6 +4,7 @@ const cron = require('node-cron');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+
 app.use(express.static('static'))
 app.use(express.json());
 require("dotenv").config();
@@ -12,7 +13,7 @@ const token = process.env.TOKEN;
 const chatId = process.env.CHAT_ID;
 
 const bot = new TelegramBot(token, { polling: false });
-let arrayNumber = 0;
+
 // Function to send a daily message
 
 const formatKeyValuePairs = (obj) => {
@@ -34,6 +35,14 @@ const keyboard = {
         ],
     ],
 };
+
+let today = new Date();
+const reference = 78724;
+const now = today.getTime() / 1000 / 6 / 60 / 60;
+const arrayNumber = Math.floor(now % reference);
+console.log(arrayNumber);
+if (arrayNumber > ombjson.length) arrayNumber = 0;
+
 function sendDailyMessage() {
 
     try {
@@ -57,8 +66,7 @@ ${formatKeyValuePairs(jsonObject.events)}
     } catch (error) {
         console.log(error)
     }
-    arrayNumber = arrayNumber + 1;
-    if (arrayNumber > ombjson.length) arrayNumber = 1;
+
 }
 
 app.get('/', (req, res) => {
@@ -71,7 +79,7 @@ app.listen(port, () => {
 
 sendDailyMessage()
 
-cron.schedule('* */6 * * *', () => {
+cron.schedule('0 9 * * *', () => {
     sendDailyMessage();
 });
 
